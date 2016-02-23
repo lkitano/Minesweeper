@@ -1,5 +1,3 @@
-
-
 import de.bezier.guido.*;
 //Declare and initialize NUM_ROWS and NUM_COLS = 20
 private static int NUM_COLS = 20;
@@ -18,20 +16,34 @@ void setup ()
     //your code to declare and initialize buttons goes here
 
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
+    bombs = new ArrayList <MSButton>();
 
-    for(int row = 0; row < NUM_ROWS; row ++){
-        for(int col = 0; col < NUM_COLS; col++){
-            buttons[row][col] = new MSButton(row,col);
-        }
+    for(int x = 0; x < NUM_ROWS; x ++){
+        for(int y = 0; y < NUM_COLS; y++){
+            buttons[x][y] = new MSButton(x,y);
+        
+    
+    
     }
-    
-    
-    
+    }
     setBombs();
 }
 public void setBombs()
 {
     //your code
+    
+    for(int b=0; b <150; b++){
+        int row = (int)(Math.random()*20);
+        int col = (int)(Math.random()*20);
+
+
+        if(bombs.contains(buttons[row][col]) == false){
+            bombs.add(buttons[row][col]);
+       
+
+
+        }
+    }
 }
 
 public void draw ()
@@ -60,6 +72,7 @@ public class MSButton
     private float x,y, width, height;
     private boolean clicked, marked;
     private String label;
+
     
     public MSButton ( int rr, int cc )
     {
@@ -93,8 +106,8 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+            fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
@@ -111,7 +124,11 @@ public class MSButton
     public boolean isValid(int r, int c)
     {
         //your code here
-        return false;
+        if(buttons[r][c].isMarked()==false)
+        return true;} else {
+            return false;
+
+        }
     }
     public int countBombs(int row, int col)
     {

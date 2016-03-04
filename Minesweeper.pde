@@ -12,6 +12,7 @@ void setup ()
     
     // make the manager
     Interactive.make( this );
+    frameRate(60);
     
     //your code to declare and initialize buttons goes here
 
@@ -32,7 +33,7 @@ public void setBombs()
 {
     //your code
     int b=0;
-    while(b<(int)((NUM_COLS*NUM_ROWS)/5)){
+    while(b<(NUM_ROWS*NUM_COLS)/6){
         int row = (int)(Math.random()*NUM_ROWS);
         int col = (int)(Math.random()*NUM_COLS);
 
@@ -49,22 +50,51 @@ public void setBombs()
 public void draw ()
 {
     background( 0 );
-    if(isWon())
+    if(isWon()){
         displayWinningMessage();
+    }
+
+   
+
 }
 public boolean isWon()
 {
     //your code here
-    return false;
+     // for(int i = 0; i < bombs.length, i++){
+     //    if(bombs.contains(i))
+     // }
+        for(int i = 0;i < NUM_ROWS; i++){
+        for(int j = 0; j < NUM_ROWS; j++){
+            if(!bombs.contains(buttons[i][j]) && !buttons[i][j].isClicked()){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
     //your code here
-    text(200,200.22, 1.25);
+    for(int i = 0 ;i < NUM_ROWS; i++){
+        for(int j = 0; j < NUM_ROWS; j++){
+            buttons[i][j].clicked = true;
+            buttons[i][j].setLabel("L");
+        }
+    }
+   
+
 }
 public void displayWinningMessage()
 {
     //your code here
+    for(int i = 0 ;i < NUM_ROWS; i++){
+        for(int j = 0; j < NUM_ROWS; j++){
+            if(!buttons[i][j].getLabel().equals("L"))
+            buttons[i][j].setLabel("W");
+        }
+    }
+   
+
 }
 
 public class MSButton
@@ -150,6 +180,10 @@ public class MSButton
     public void setLabel(String newLabel)
     {
         label = newLabel;
+    }
+
+    public String getLabel(){
+        return label;
     }
     public boolean isValid(int r, int c)
     {

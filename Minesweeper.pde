@@ -132,12 +132,11 @@ public class MSButton
         clicked = true;
         if(keyPressed){
             marked = !marked;
-        } else 
-        if (bombs.contains(this)){
+        } else if (bombs.contains(this)){
             {
                 displayLosingMessage();
             }
-        } else if (this.countBombs(r,c)> 0){
+        } else if (this.countBombs(r,c)> 0 && marked == false){
         
             setLabel(Integer.toString(this.countBombs(r,c)));
         } else if(this.countBombs(r,c)==0){
@@ -166,7 +165,7 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        else if( clicked && bombs.contains(this) ) 
+        else if( clicked && bombs.contains(this)) 
             fill(255,0,0);
         else if(clicked)
             fill( 200 );

@@ -136,9 +136,9 @@ public class MSButton
             {
                 displayLosingMessage();
             }
-        } else if (this.countBombs(r,c)> 0 && marked == false){
+        } else if (this.countBombs(r,c)> 0 ){
         
-            setLabel(Integer.toString(this.countBombs(r,c)));
+            setLabel(" "+ countBombs(r,c));
         } else if(this.countBombs(r,c)==0){
              for (int i =-1; i <2;i++){
                 for(int j = -1; j < 2; j++){
@@ -204,7 +204,7 @@ public class MSButton
         return numBombs;
         
     }
-} 
+}
 
 
 
